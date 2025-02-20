@@ -1,0 +1,15 @@
+html, body { height: 100%; width: 100%; margin:0 !important;  padding: 0 !important; overflow: hidden; touch-action: pan-y;}
+
+.hidden { display: none; }
+
+canvas { padding: 0; margin: 0; box-sizing: border-box; } /* To remove the scrollbars */
+
+#play-pong { position: absolute; left: calc(40% + min(4.5vmin, 4.5vw)); top: 25vh; z-index: 1; font-size: min(4.5vmin, 4.5vw); text-align: center; }
+
+.button-separator { margin-bottom: 2.5vh; }
+
+.pause { position: absolute; top: 1%; z-index: 1; font-size: min(4.5vmin, 4.5vw); text-align: left; margin: 0; padding: 0; line-height: 100%; }
+
+#left-pause { left: calc((4% - min(4.5vmin, 4.5vw)) / 2); }
+
+#right-pause { left: calc(96% + ((4% - min(4.5vmin, 4.5vw)) / 2)); }

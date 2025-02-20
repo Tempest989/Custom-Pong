@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<title>Pong</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<!-- OLD CODE IDEA -->
+		<!-- <div id="pong-container">
+			<div id="left-bat" class="bat left">Opponent bat</div>
+			<div id="right-bat" class="bat right">Player bat</div>
+		</div>
+		<p>score</p> -->
+
+		<canvas id="pong-canvas"></canvas>
+
+		<div id="play-pong">
+			<div class="button-separator">
+				<button onclick="startPong()">Start Pong</button>
+			</div>
+			<div class="button-separator">
+				<button onclick="startPong('powerup')">Start PowerUp-Pong</button>
+			</div>
+			<div class="button-separator">
+				<button onclick="startPong('obstacle')">Start Obstacle-Pong</button>
+			</div>
+			<div class="button-separator">
+				<button onclick="startPong('powerup-obstacle')">Start PowerUp-Obstacle-Pong</button>
+			</div>
+			<div class="button-separator">
+				<button onclick="startPong('chaos')">Start Chaos-Pong</button>
+			</div>
+			<div class="button-separator">
+				<button onclick="startPong('chaos-obstacle')">Start Chaos-Obstacle-Pong</button>
+			</div>
+		</div>
+
+		<button onclick="pausePong()" id="left-pause" class="pause hidden">⏸</button>
+		<button onclick="pausePong()" id="right-pause" class="pause hidden">⏸</button>
+
+		<script src="script.js"></script>
+	</body>
+</html>
