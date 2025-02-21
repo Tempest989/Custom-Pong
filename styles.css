@@ -13,3 +13,9 @@ canvas { padding: 0; margin: 0; box-sizing: border-box; } /* To remove the scrol
 #left-pause { left: calc((4% - min(4.5vmin, 4.5vw)) / 2); }
 
 #right-pause { left: calc(96% + ((4% - min(4.5vmin, 4.5vw)) / 2)); }
+
+.reset { position: absolute; top: 94%; z-index: 1; font-size: min(2vmin, 2vw); text-align: center; margin: 0; padding: 0; line-height: 100%; }
+
+#left-reset { left: calc((3.5% - min(4.5vmin, 4.5vw)) / 2); }
+
+#right-reset { left: calc(95.5% + ((4% - min(4.5vmin, 4.5vw)) / 2)); }

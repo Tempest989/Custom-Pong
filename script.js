@@ -114,7 +114,6 @@ class Paddle {
 				}
 				else {
 					this.score--;
-					startDelay = 40;
 					resetPong();
 				}
 				return (true);
@@ -143,7 +142,6 @@ class Paddle {
 				}
 				else {
 					this.score--;
-					startDelay = 40;
 					resetPong();
 				}
 				return (true);
@@ -193,13 +191,14 @@ class Paddle {
 			playButtons.classList.remove("hidden");
 			pauseButtons[0].classList.add("hidden");
 			pauseButtons[1].classList.add("hidden");
+			// not sure if reset add hidden is necessary here.
+			resetButtons[0].classList.add("hidden");
+			resetButtons[1].classList.add("hidden");
 			startedFlag = false;
 			return;
 		}
-		if (callReset) {
-			startDelay = 40;
+		if (callReset) 
 			resetPong();
-		}
 	}
 }
 
@@ -779,6 +778,8 @@ const customObstacles = (toLoad) => {
 			// for an extra custom settings if wanted.
 			break;
 	}
+	if (obstacles.length > 0)
+		obstacleNum = toLoad;
 }
 
 
@@ -795,6 +796,7 @@ const customObstacles = (toLoad) => {
 
 const playButtons = document.getElementById("play-pong");
 const pauseButtons = [document.getElementById("left-pause"), document.getElementById("right-pause")];
+const resetButtons = [document.getElementById("left-reset"), document.getElementById("right-reset")];
 const pongCanvas = document.getElementById("pong-canvas");
 pongCanvas.width = window.innerWidth;
 pongCanvas.height = window.innerHeight;
@@ -827,6 +829,7 @@ let startedFlag = false;
 let playFlag = false;
 let chaos = false;
 let typeFlag = 0;
+let obstacleNum = 0;
 
 const resetPong = (scoreReset = 0) => {
 	leftPaddle.reset(scoreReset, "left");
@@ -839,6 +842,7 @@ const resetPong = (scoreReset = 0) => {
 
 	freezeDelay = 0;
 	bounciness = 1;
+	startDelay = 40;
 }
 
 const resizePong = () => {
@@ -851,7 +855,7 @@ const resizePong = () => {
 
 	// console.log("EffectFlag = ", effectFlags);
 
-	console.log("Pong CANVAS :: ", pongCanvas.width, " X ", pongCanvas.height);
+	// console.log("Reset Pong CANVAS :: ", pongCanvas.width, " X ", pongCanvas.height);
 	// console.log("window.inner stuff :: ", window.innerWidth,  " X ", window.innerHeight);
 	// console.log("document.documetElement stuff :: ", document.documentElement.clientWidth, " X ", document.documentElement.clientWidth);
 	// console.log("document.body stuff :: ", document.body.clientWidth, " X ", document.body.clientWidth);
@@ -860,11 +864,19 @@ const resizePong = () => {
 	// console.log("ball::: x = ", balls[0].x, " :: y = ", balls[0].y);
 }
 
+const resetButton = () => {
+	resetButtons[0].classList.add("hidden");
+	resetButtons[1].classList.add("hidden");
+	resetPong();
+}
+
 const pausePong = () => {
 	playFlag = !playFlag;
 	if (playFlag) {
 		pauseButtons[0].innerText = '⏸';
 		pauseButtons[1].innerText = '⏸';
+		resetButtons[0].classList.add("hidden");
+		resetButtons[1].classList.add("hidden");
 		switch (typeFlag) {
 			case 1:
 				pongAnimatePowerUp();
@@ -882,6 +894,8 @@ const pausePong = () => {
 	} else {
 		pauseButtons[0].innerText = '⏵︎';
 		pauseButtons[1].innerText = '⏵︎';
+		resetButtons[0].classList.remove("hidden");
+		resetButtons[1].classList.remove("hidden");
 	}
 	// console.log("after hit play = ", play);
 }
@@ -906,10 +920,8 @@ const keyDown = (event) => {
 				pausePong();
 			break;
 		case "r": case "R":
-			if (event.shiftKey) {
-				startDelay = 40;
+			if (event.shiftKey)
 				resetPong();
-			}
 			break;
 	}
 }
@@ -1389,7 +1401,6 @@ const startPong = (type = "normal") => {
 	pauseButtons[0].classList.remove("hidden");
 	pauseButtons[1].classList.remove("hidden");
 	frameCount = 1;
-	startDelay = 40;
 	startedFlag = true;
 	playFlag = true;
 	resetPong(1);
@@ -1407,10 +1418,10 @@ const startPong = (type = "normal") => {
 			pongAnimateObstacle();
 			break;
 		case "powerup-obstacle":
-			console.log("playing powerup-obstacle");
+			// console.log("playing powerup-obstacle");
 			typeFlag = 3;
-			customObstacles(1);
-			console.log("obstacles = ", obstacles);
+			customObstacles(Math.floor(Math.random() * 11));
+			// console.log("obstacles = ", obstacles);
 			pongAnimateObstaclePowerUp();
 			break;
 		case "chaos":
@@ -1429,7 +1440,7 @@ const startPong = (type = "normal") => {
 	}
 }
 
-document.addEventListener("resize", resizePong, false);
+window.addEventListener("resize", resizePong, false);
 
 document.addEventListener("keydown", keyDown, false);
 document.addEventListener("keyup", keyUp, false);
