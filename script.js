@@ -849,6 +849,9 @@ const resizePong = () => {
 	pongCanvas.width = window.innerWidth;
 	pongCanvas.height = window.innerHeight;
 
+	if (obstacles.length > 0)
+		customObstacles(obstacleNum);
+
 	resetPong();
 
 	// console.log("reset / resize PONG!!");
